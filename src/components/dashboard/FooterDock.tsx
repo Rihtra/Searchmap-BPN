@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { MessageSquare, Info, HelpCircle } from 'lucide-react';
@@ -20,9 +20,9 @@ export const FooterDock: React.FC<FooterDockProps> = ({
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-1.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
         <button
           onClick={onOpenComplaint}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#525B61] hover:bg-[#E8ECEE] transition"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#16805C] hover:bg-[#E8ECEE] transition"
         >
-          <MessageSquare className="w-4 h-4 text-[#525B61]" />
+          <MessageSquare className="w-4 h-4 text-[#16805C]" />
           <span>Keluhan</span>
         </button>
 
@@ -30,9 +30,9 @@ export const FooterDock: React.FC<FooterDockProps> = ({
 
         <button
           onClick={onOpenInfo}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#525B61] hover:bg-[#E8ECEE] transition"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#16805C] hover:bg-[#E8ECEE] transition"
         >
-          <Info className="w-4 h-4 text-[#525B61]" />
+          <Info className="w-4 h-4 text-[#16805C]" />
           <span>Informasi app</span>
         </button>
 
@@ -40,9 +40,9 @@ export const FooterDock: React.FC<FooterDockProps> = ({
 
         <button
           onClick={onOpenGuide}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#525B61] hover:bg-[#E8ECEE] transition"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#16805C] hover:bg-[#E8ECEE] transition"
         >
-          <HelpCircle className="w-4 h-4 text-[#525B61]" />
+          <HelpCircle className="w-4 h-4 text-[#16805C]" />
           <span>Cara penggunaan</span>
         </button>
       </div>
@@ -54,3 +54,4 @@ export const FooterDock: React.FC<FooterDockProps> = ({
     </footer>
   );
 };
+

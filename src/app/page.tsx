@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -127,7 +127,6 @@ export default function HomePage() {
 
       {/* Main App Content (Portal Admin removed from header) */}
       <HeaderNav
-        onReplayAnimation={() => setShowLoading(true)}
         totalMaps={maps.length}
       />
 
@@ -155,7 +154,7 @@ export default function HomePage() {
                 </span>
                 <button
                   onClick={handleResetFilters}
-                  className="text-xs text-[#525B61] hover:text-[#2C3236] font-semibold"
+                  className="text-xs text-[#16805C] hover:text-[#2C3236] font-semibold"
                 >
                   Bersihkan Pencarian
                 </button>
@@ -170,22 +169,22 @@ export default function HomePage() {
           ) : (
             /* Requirement 1: Bagian dashboard awal tidak menampilkan apapun + Tombol Tampil Semua */
             <div className="my-12 py-16 px-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
-              <div className="w-16 h-16 rounded-2xl bg-[#E8ECEE] text-[#525B61] flex items-center justify-center mb-4 shadow-inner">
-                <Search className="w-8 h-8 text-[#525B61]" />
+              <div className="w-16 h-16 rounded-2xl bg-[#E8ECEE] text-[#16805C] flex items-center justify-center mb-4 shadow-inner">
+                <Search className="w-8 h-8 text-[#16805C]" />
               </div>
 
               <h3 className="text-xl font-bold text-slate-900">
                 Sistem Siap Melakukan Pencarian
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 max-w-md mt-2 leading-relaxed">
-                Ketik nomor kode (contoh: <span className="font-mono text-[#525B61] font-semibold">1.08</span>, <span className="font-mono text-[#525B61] font-semibold">2.15</span>), nama desa, atau nama proyek pada kolom di atas, atau klik tombol di bawah untuk menampilkan seluruh inventaris peta.
+                Ketik nomor kode (contoh: <span className="font-mono text-[#16805C] font-semibold">1.08</span>, <span className="font-mono text-[#16805C] font-semibold">2.15</span>), nama desa, atau nama proyek pada kolom di atas, atau klik tombol di bawah untuk menampilkan seluruh inventaris peta.
               </p>
 
               {/* Action Buttons in Initial State */}
               <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
                 <button
                   onClick={() => setShowAll(true)}
-                  className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#525B61] hover:bg-[#3D4449] text-white text-xs sm:text-sm font-bold transition shadow-xs hover:shadow"
+                  className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#16805C] hover:bg-[#3D4449] text-white text-xs sm:text-sm font-bold transition shadow-xs hover:shadow"
                 >
                   <Eye className="w-4 h-4" />
                   <span>Tampilkan Semua Peta (118 Berkas)</span>
@@ -195,7 +194,7 @@ export default function HomePage() {
                   href="/tabung"
                   className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition"
                 >
-                  <Archive className="w-4 h-4 text-[#525B61]" />
+                  <Archive className="w-4 h-4 text-[#16805C]" />
                   <span>Jelajahi Berdasarkan Tabung (21 Tabung)</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -211,7 +210,7 @@ export default function HomePage() {
                     <button
                       key={tag}
                       onClick={() => setSearchQuery(tag)}
-                      className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-[#E8ECEE] hover:text-[#525B61] text-slate-600 text-xs border border-slate-200 transition"
+                      className="px-2.5 py-1 rounded-lg bg-slate-50 hover:bg-[#E8ECEE] hover:text-[#16805C] text-slate-600 text-xs border border-slate-200 transition"
                     >
                       {tag}
                     </button>
@@ -255,3 +254,4 @@ export default function HomePage() {
     </div>
   );
 }
+

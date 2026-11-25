@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapRecord, 
   MapProject, 
@@ -17,6 +18,7 @@ import { MapPreviewModal } from '@/components/modal/MapPreviewModal';
 import { ComplaintModal } from '@/components/modal/ComplaintModal';
 import { AppInfoModal } from '@/components/modal/AppInfoModal';
 import { UserGuideModal } from '@/components/modal/UserGuideModal';
+import { CadastralSketch } from '@/components/ui/CadastralSketch';
 import { 
   Archive, 
   Search, 
@@ -113,8 +115,8 @@ export default function TabungPage() {
         {/* Breadcrumb & Title */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs text-[#525B61] font-semibold mb-1">
-              <Archive className="w-4 h-4 text-[#525B61]" />
+            <div className="flex items-center gap-2 text-xs text-[#16805C] font-semibold mb-1">
+              <Archive className="w-4 h-4 text-[#16805C]" />
               <span>SISTEM PENYIMPANAN FISIK WARKAH</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -133,7 +135,7 @@ export default function TabungPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Cari Tabung (1-21) atau proyek..."
-              className="w-full text-xs pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-300 focus:outline-none focus:border-[#525B61] focus:ring-2 focus:ring-[#525B61]/15"
+              className="w-full text-xs pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-slate-300 focus:outline-none focus:border-[#16805C] focus:ring-2 focus:ring-[#16805C]/15"
             />
           </div>
         </div>
@@ -151,35 +153,36 @@ export default function TabungPage() {
               <span>Kembali ke Daftar 21 Tabung</span>
             </button>
 
-            {/* Tabung Header Banner in Slate Gradient */}
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#242A2E] via-[#3D4449] to-[#525B61] text-white shadow-md border border-[#525B61]/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <span className="text-xs uppercase font-mono tracking-widest text-[#D4D9DB] font-bold block">
-                  BERKAS WARKAH KADASTRAL
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white mt-1">
-                  TABUNG {selectedTabungDetail.tabungNumber}
-                </h2>
-                <p className="text-sm text-[#E8ECEE] font-medium mt-1">
-                  {selectedTabungDetail.proyek.namaProyek}
-                </p>
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs font-mono font-bold">
-                    Rentang Kode: {selectedTabungDetail.kodeMin} - {selectedTabungDetail.kodeMax}
+            {/* Tabung Header Banner — Simplified: Nomor Tabung besar, jumlah gulungan, judul proyek */}
+            <div className="p-6 rounded-3xl bg-gradient-to-br from-[#16805C] to-[#0F5A42] text-white shadow-md border border-[#16805C]/40">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-xs uppercase font-mono tracking-widest text-white/60 font-bold block mb-2">
+                    BERKAS WARKAH KADASTRAL
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-[#E8ECEE] text-[#2C3236] font-bold">
-                    {selectedTabungDetail.count} Gulungan Peta
-                  </span>
+                  {/* Nomor Tabung — Besar & Bold */}
+                  <div className="flex items-baseline gap-3">
+                    <h2 className="text-6xl sm:text-7xl font-black font-mono tracking-tight text-white leading-none">
+                      {selectedTabungDetail.tabungNumber}
+                    </h2>
+                    <div className="flex flex-col">
+                      <span className="text-base font-bold text-white/80">TABUNG</span>
+                      {/* Jumlah gulungan */}
+                      <span className="text-2xl font-black text-emerald-300 font-mono">
+                        {selectedTabungDetail.count} <span className="text-sm font-semibold text-white/70">gulungan</span>
+                      </span>
+                    </div>
+                  </div>
+                  {/* Judul / Nama Proyek */}
+                  <p className="text-sm font-semibold text-white/90 mt-3 max-w-sm">
+                    {selectedTabungDetail.proyek.namaProyek}
+                  </p>
                 </div>
-              </div>
 
-              <div className="p-4 rounded-2xl bg-white/10 border border-white/20 text-xs flex flex-col gap-1.5 min-w-[220px]">
-                <span className="font-bold text-[#D4D9DB] text-[11px] uppercase">Cakupan Wilayah</span>
-                <div className="text-white text-xs font-medium">
-                  {selectedTabungDetail.desaList.length > 0 ? selectedTabungDetail.desaList.join(', ') : 'Wilayah Kabupaten Siak'}
-                </div>
-                <div className="text-[#D4D9DB] text-[11px]">
-                  Kec. {selectedTabungDetail.kecList.join(', ')}
+                {/* Kecamatan badge */}
+                <div className="shrink-0 px-4 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-xs text-white/80">
+                  <span className="block font-bold text-white mb-0.5 text-[11px] uppercase tracking-wide">Wilayah</span>
+                  <span>{selectedTabungDetail.kecList.join(', ') || 'Siak'}</span>
                 </div>
               </div>
             </div>
@@ -187,119 +190,106 @@ export default function TabungPage() {
             {/* List of Maps Inside This Tabung */}
             <div>
               <h3 className="text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#525B61]" />
+                <FileText className="w-4 h-4 text-[#16805C]" />
                 Daftar Gulungan Peta di dalam Tabung {selectedTabungDetail.tabungNumber} ({selectedTabungDetail.count} Peta)
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {selectedTabungDetail.maps.map((map) => (
-                  <div
+                {selectedTabungDetail.maps.map((map, idx) => (
+                  <motion.div
                     key={map.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.04, ease: [0.25, 0.1, 0.25, 1] }}
                     onClick={() => setSelectedMap(map)}
-                    className="group cursor-pointer p-4 rounded-2xl bg-white border border-slate-200/90 hover:border-[#525B61] shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                    className="group cursor-pointer rounded-2xl bg-white border border-slate-200/90 hover:border-[#16805C] shadow-xs hover:shadow-md transition-all overflow-hidden flex flex-col"
                   >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#E8ECEE] text-[#2C3236] font-mono font-bold text-xs">
-                          Kode: {map.kode}
-                        </span>
-                        <span className="text-[11px] font-mono text-slate-500">
-                          Lbr: {map.petunjukLembar}
-                        </span>
+                    {/* Gambar Sketsa Peta */}
+                    <div className="relative w-full h-36 bg-slate-50 overflow-hidden border-b border-slate-100">
+                      <CadastralSketch
+                        map={map}
+                        className="w-full h-full"
+                        interactive={false}
+                        showControls={false}
+                      />
+                      {/* Overlay kode di atas gambar */}
+                      <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-xs font-mono font-bold text-[11px] text-slate-800 shadow-xs border border-slate-200">
+                        {map.kode}
                       </div>
+                      <div className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-white/90 backdrop-blur-xs text-[10px] font-medium text-slate-600">
+                        Lbr: {map.petunjukLembar}
+                      </div>
+                    </div>
 
-                      <h4 className="font-bold text-slate-900 text-sm group-hover:text-[#525B61] transition line-clamp-2">
+                    {/* Info bawah */}
+                    <div className="p-3.5 flex flex-col flex-1">
+                      <h4 className="font-bold text-slate-900 text-xs group-hover:text-[#16805C] transition line-clamp-2 leading-snug">
                         {map.judul}
                       </h4>
-                    </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                      <span className="flex items-center gap-1 truncate max-w-[180px]">
-                        <MapPin className="w-3.5 h-3.5 text-[#525B61] shrink-0" />
-                        {map.desa !== '-' ? map.desa : 'Semua Desa'}
-                      </span>
-                      {map.ttd ? (
-                        <span className="text-[10px] text-[#2C3236] font-semibold flex items-center gap-1 bg-[#E8ECEE] px-2 py-0.5 rounded-full">
-                          <CheckCircle2 className="w-3 h-3 text-[#525B61]" /> TTD
+                      <div className="mt-auto pt-3 flex items-center justify-between text-[11px] text-slate-500">
+                        <span className="flex items-center gap-1 truncate max-w-[150px]">
+                          <MapPin className="w-3 h-3 text-[#16805C] shrink-0" />
+                          {map.desa !== '-' ? map.desa : 'Semua Desa'}
                         </span>
-                      ) : (
-                        <span className="text-[10px] text-amber-700 font-semibold flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-full">
-                          <AlertCircle className="w-3 h-3" /> Tanpa TTD
-                        </span>
-                      )}
+                        {map.ttd ? (
+                          <span className="flex items-center gap-1 text-[#16805C] font-semibold bg-emerald-50 px-2 py-0.5 rounded-full shrink-0">
+                            <CheckCircle2 className="w-3 h-3" /> TTD
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-1 text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded-full shrink-0">
+                            <AlertCircle className="w-3 h-3" /> Tanpa TTD
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
         ) : (
-          /* View: 21 Tabung Grid Cards */
-          <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredTabung.map((t) => (
-                <div
+          /* View: 21 Tabung Grid Cards — Simplified: Nomor, Jumlah, Judul */
+          <motion.div
+            key="tabung-grid"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredTabung.map((t, idx) => (
+                <motion.div
                   key={t.tabungNumber}
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: idx * 0.03, ease: [0.25, 0.1, 0.25, 1] }}
                   onClick={() => setActiveTabung(t.tabungNumber)}
-                  className="group cursor-pointer p-5 rounded-3xl bg-white border border-slate-200/90 hover:border-[#525B61] shadow-xs hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden"
+                  className="group cursor-pointer p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-[#16805C] shadow-xs hover:shadow-md transition-all flex items-center gap-4 relative overflow-hidden"
                 >
-                  {/* Decorative Background Accent in #525B61 */}
-                  <div className="absolute -right-4 -bottom-4 w-28 h-28 bg-[#525B61]/5 rounded-full blur-xl pointer-events-none group-hover:bg-[#525B61]/10 transition-colors" />
+                  {/* Nomor Tabung besar di kiri */}
+                  <div className="shrink-0 w-14 h-14 rounded-2xl bg-[#16805C] flex flex-col items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                    <span className="text-[10px] font-bold text-white/70 uppercase tracking-wide leading-none">No.</span>
+                    <span className="text-2xl font-black font-mono leading-none">{t.tabungNumber}</span>
+                  </div>
 
-                  <div>
-                    {/* Header: Tabung Number & Canister Icon */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-11 h-11 rounded-2xl bg-[#525B61] text-white flex flex-col items-center justify-center font-mono font-black shadow-xs">
-                          <Archive className="w-5 h-5 text-[#E8ECEE]" />
-                        </div>
-                        <div>
-                          <span className="text-xl font-black font-mono text-slate-900 block group-hover:text-[#525B61] transition">
-                            TABUNG {t.tabungNumber}
-                          </span>
-                          <span className="text-[10px] font-mono text-slate-400 block">
-                            Kode: {t.tabungNumber}.xx
-                          </span>
-                        </div>
-                      </div>
-
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#E8ECEE] text-[#2C3236] border border-[#CBD2D6]">
-                        {t.count} Peta
+                  {/* Jumlah gulungan + Judul */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-[#16805C] border border-emerald-200">
+                        {t.count} gulungan
                       </span>
                     </div>
-
-                    {/* Proyek Name */}
-                    <h3 className="font-bold text-slate-900 text-sm line-clamp-2 leading-snug group-hover:text-[#525B61] transition">
+                    <h3 className="font-bold text-slate-900 text-xs sm:text-sm line-clamp-2 leading-snug group-hover:text-[#16805C] transition">
                       {t.proyek.namaProyek}
                     </h3>
-
-                    {/* Rentang Kode */}
-                    <div className="mt-2 text-xs font-mono text-slate-500 flex items-center gap-1.5">
-                      <span className="text-slate-400">Rentang:</span>
-                      <strong className="text-slate-700 font-semibold">{t.kodeMin}</strong>
-                      <span>s/d</span>
-                      <strong className="text-slate-700 font-semibold">{t.kodeMax}</strong>
-                    </div>
                   </div>
 
-                  {/* Bottom: Lokasi & Action */}
-                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1 text-slate-500 truncate max-w-[180px]">
-                      <MapPin className="w-3.5 h-3.5 text-[#525B61] shrink-0" />
-                      <span className="truncate">
-                        {t.kecList.length > 0 ? t.kecList.join(', ') : 'Siak'}
-                      </span>
-                    </div>
-
-                    <span className="flex items-center gap-1 font-semibold text-[#525B61] group-hover:translate-x-1 transition-transform">
-                      Buka Isi Tabung
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
+                  <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-[#16805C] group-hover:translate-x-1 transition-all shrink-0" />
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Footer Dock */}
@@ -335,3 +325,4 @@ export default function TabungPage() {
     </div>
   );
 }
+

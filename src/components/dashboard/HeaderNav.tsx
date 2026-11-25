@@ -1,24 +1,18 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Layers, RefreshCw, Archive, Search } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Layers, Archive, Search } from 'lucide-react';
 
 interface HeaderNavProps {
-  onReplayAnimation?: () => void;
   totalMaps?: number;
 }
 
-export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMaps = 118 }) => {
+export const HeaderNav: React.FC<HeaderNavProps> = ({ totalMaps = 118 }) => {
   const pathname = usePathname();
-
-  const handleReload = () => {
-    if (typeof window !== 'undefined') {
-      window.location.reload();
-    }
-  };
 
   return (
     <header className="sticky top-0 z-30 w-full bg-[#F7F6F2]/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3 transition-all">
@@ -36,10 +30,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-[#525B61] transition">
+              <span className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight group-hover:text-[#16805C] transition">
                 Pencarian Peta BPN
               </span>
-              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#E8ECEE] text-[#525B61] border border-[#CBD2D6]">
+              <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#E8ECEE] text-[#16805C] border border-[#CBD2D6]">
                 Kabupaten Siak
               </span>
             </div>
@@ -49,50 +43,41 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
           </div>
         </Link>
 
-        {/* Center Navigation Tabs: [Pencarian] vs [Daftar Tabung] */}
-        <div className="hidden md:flex items-center gap-1.5 p-1 rounded-xl bg-slate-200/70 border border-slate-300/60 text-xs font-semibold">
-          <Link
-            href="/"
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition ${
-              pathname === '/'
-                ? 'bg-white text-[#525B61] shadow-xs font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            <Search className="w-3.5 h-3.5" />
-            <span>Pencarian Peta</span>
-          </Link>
-
-          <Link
-            href="/tabung"
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition ${
-              pathname === '/tabung'
-                ? 'bg-white text-[#525B61] shadow-xs font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            <Archive className="w-3.5 h-3.5 text-[#525B61]" />
-            <span>Arsip Tabung (21)</span>
-          </Link>
+        {/* Center Navigation Tabs: animated with Framer Motion layoutId */}
+        <div className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-slate-200/70 border border-slate-300/60 text-xs font-semibold relative">
+          {[
+            { href: '/', icon: Search, label: 'Pencarian Peta' },
+            { href: '/tabung', icon: Archive, label: 'Arsip Tabung (21)' }
+          ].map(({ href, icon: Icon, label }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className="relative flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg z-10 transition-colors duration-200"
+                style={{ color: isActive ? '#16805C' : '#475569' }}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="headerActiveTab"
+                    className="absolute inset-0 bg-white rounded-lg shadow-xs"
+                    transition={{ type: 'spring', stiffness: 500, damping: 40, mass: 0.6 }}
+                  />
+                )}
+                <Icon className="w-3.5 h-3.5 relative z-10" />
+                <span className={`relative z-10 ${isActive ? 'font-bold' : 'font-semibold'}`}>{label}</span>
+              </Link>
+            );
+          })}
         </div>
 
         {/* Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Counter */}
           <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-xs text-slate-600 shadow-xs">
-            <Layers className="w-3.5 h-3.5 text-[#525B61]" />
+            <Layers className="w-3.5 h-3.5 text-[#16805C]" />
             <span className="font-medium">{totalMaps} Berkas Peta</span>
           </div>
-
-          {/* Requirement 3: Tombol Animasi Ganti Reload */}
-          <button
-            onClick={handleReload}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-xs text-slate-700 font-semibold transition shadow-xs hover:border-[#525B61] hover:text-[#525B61]"
-            title="Muat ulang halaman dan data"
-          >
-            <RefreshCw className="w-3.5 h-3.5 text-[#525B61]" />
-            <span>Reload</span>
-          </button>
         </div>
       </div>
 
@@ -101,7 +86,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
         <Link
           href="/"
           className={`flex items-center gap-1.5 px-3 py-1 rounded-lg ${
-            pathname === '/' ? 'bg-[#525B61] text-white' : 'text-slate-600'
+            pathname === '/' ? 'bg-[#16805C] text-white' : 'text-slate-600'
           }`}
         >
           <Search className="w-3.5 h-3.5" />
@@ -110,7 +95,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
         <Link
           href="/tabung"
           className={`flex items-center gap-1.5 px-3 py-1 rounded-lg ${
-            pathname === '/tabung' ? 'bg-[#525B61] text-white' : 'text-slate-600'
+            pathname === '/tabung' ? 'bg-[#16805C] text-white' : 'text-slate-600'
           }`}
         >
           <Archive className="w-3.5 h-3.5" />
@@ -120,3 +105,4 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
     </header>
   );
 };
+

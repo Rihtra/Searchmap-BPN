@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -36,7 +36,7 @@ export const AppInfoModal: React.FC<AppInfoModalProps> = ({ isOpen, onClose, con
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#FAF8F5]">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#525B61] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#16805C] flex items-center justify-center">
                 <Info className="w-4 h-4" />
               </div>
               <div>
@@ -56,7 +56,7 @@ export const AppInfoModal: React.FC<AppInfoModalProps> = ({ isOpen, onClose, con
           {/* Body */}
           <div className="p-6 overflow-y-auto flex flex-col gap-4 text-xs text-slate-600 leading-relaxed">
             <div className="p-3.5 rounded-2xl bg-[#E8ECEE]/60 border border-[#CBD2D6] flex items-start gap-3">
-              <Landmark className="w-5 h-5 text-[#525B61] shrink-0 mt-0.5" />
+              <Landmark className="w-5 h-5 text-[#16805C] shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-bold text-[#2C3236] text-xs">{config.instansiNama}</h4>
                 <p className="text-[11px] text-slate-600 mt-0.5">{config.alamatKantor}</p>
@@ -65,7 +65,7 @@ export const AppInfoModal: React.FC<AppInfoModalProps> = ({ isOpen, onClose, con
 
             <div>
               <h4 className="font-bold text-slate-800 text-sm mb-1.5 flex items-center gap-1.5">
-                <Map className="w-4 h-4 text-[#525B61]" />
+                <Map className="w-4 h-4 text-[#16805C]" />
                 Latar Belakang Digitalisasi
               </h4>
               <p>
@@ -82,7 +82,7 @@ export const AppInfoModal: React.FC<AppInfoModalProps> = ({ isOpen, onClose, con
 
             <div>
               <h4 className="font-bold text-slate-800 text-sm mb-1.5 flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#525B61]" />
+                <ShieldCheck className="w-4 h-4 text-[#16805C]" />
                 Validitas & Status Tanda Tangan
               </h4>
               <p>
@@ -100,3 +100,4 @@ export const AppInfoModal: React.FC<AppInfoModalProps> = ({ isOpen, onClose, con
     </AnimatePresence>
   );
 };
+
