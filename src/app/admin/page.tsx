@@ -29,6 +29,7 @@ import {
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { AdminDashboardTab } from '@/components/admin/AdminDashboardTab';
 import { AdminDataTableTab } from '@/components/admin/AdminDataTableTab';
+import { AdminTabungTab } from '@/components/admin/AdminTabungTab';
 import { AdminComplaintsTab } from '@/components/admin/AdminComplaintsTab';
 import { MapFormModal } from '@/components/admin/MapFormModal';
 import { MapPreviewModal } from '@/components/modal/MapPreviewModal';
@@ -51,7 +52,7 @@ export default function AdminPage() {
   const [isAuthChecking, setIsAuthChecking] = useState(true);
 
   // Dashboard Data State
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'maps' | 'complaints' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'maps' | 'tabung' | 'complaints' | 'settings'>('dashboard');
   const [maps, setMaps] = useState<MapRecord[]>([]);
   const [projects, setProjects] = useState<MapProject[]>([]);
   const [config, setConfig] = useState<SystemConfig | null>(null);
@@ -118,7 +119,7 @@ export default function AdminPage() {
 
   const handleSaveMap = (record: MapRecord) => {
     let updated: MapRecord[];
-    if (editingMap) {
+    if (editingMap && editingMap.id) {
       updated = maps.map((m) => (m.id === record.id ? record : m));
     } else {
       updated = [record, ...maps];
@@ -218,14 +219,15 @@ export default function AdminPage() {
         setActiveTab={setActiveTab}
         complaintCount={complaints.length}
         totalMaps={maps.length}
+        totalTabung={projects.length}
         currentUser={session.user}
         onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-white my-3 mr-3 md:my-4 md:mr-4 lg:my-5 lg:mr-5 rounded-[24px] md:rounded-[36px] p-6 sm:p-8 lg:p-10 overflow-y-auto h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)] lg:h-[calc(100vh-2.5rem)] shadow-none border-none">
-        {/* Top Breadcrumb Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-6 border-b border-slate-100">
+      <main className="flex-1 bg-white my-3 mr-3 md:my-4 md:mr-4 lg:my-5 lg:mr-5 rounded-[24px] md:rounded-[36px] flex flex-col h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)] lg:h-[calc(100vh-2.5rem)] overflow-hidden shadow-none border-none">
+        {/* Fixed Top Breadcrumb Header (Sticky & Non-scrollable) */}
+        <div className="shrink-0 px-6 pt-5 sm:px-8 sm:pt-6 lg:px-10 lg:pt-7 pb-5 border-b border-slate-100 bg-white z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-widest text-emerald-700 uppercase">
               <span>BPN SIAK</span>
@@ -237,6 +239,7 @@ export default function AdminPage() {
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-1 truncate">
               {activeTab === 'dashboard' && 'Dashboard Pengelolaan Arsip Peta'}
               {activeTab === 'maps' && 'Master Data Arsip Warkah Tanah'}
+              {activeTab === 'tabung' && 'Inventaris & Manajemen Arsip Tabung (21)'}
               {activeTab === 'complaints' && 'Kotak Masuk Feedback & Masukan Pengguna'}
               {activeTab === 'settings' && 'Pengaturan Sistem & Manajemen User'}
             </h1>
@@ -253,14 +256,16 @@ export default function AdminPage() {
           </div>
         </div>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-          >
+        {/* Scrollable Content Body Area */}
+        <div className="flex-1 overflow-y-auto px-6 sm:px-8 lg:px-10 py-6">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            >
             {activeTab === 'dashboard' && (
               <AdminDashboardTab
                 maps={maps}
@@ -285,6 +290,41 @@ export default function AdminPage() {
                 }}
                 onDelete={handleDeleteMap}
                 onSelectMap={setSelectedPreviewMap}
+              />
+            )}
+
+            {activeTab === 'tabung' && (
+              <AdminTabungTab
+                maps={maps}
+                projects={projects}
+                onSelectMap={setSelectedPreviewMap}
+                onEditMap={(map) => {
+                  setEditingMap(map);
+                  setIsFormModalOpen(true);
+                }}
+                onDeleteMap={handleDeleteMap}
+                onAddNewToTabung={(tabungNumber, proyekId) => {
+                  const proj = projects.find((p) => p.id === proyekId);
+                  setEditingMap({
+                    id: '',
+                    kode: `${tabungNumber}.`,
+                    tabungNumber: tabungNumber,
+                    kodeTabung: `TABUNG ${tabungNumber}`,
+                    proyekId: proyekId,
+                    proyekNama: proj ? proj.namaProyek : `Proyek ${proyekId}`,
+                    judul: 'Peta Kapling Pendaftaran Tanah',
+                    petunjukLembar: '',
+                    desa: '',
+                    kecamatan: 'Siak Sri Indrapura',
+                    ttd: true,
+                    skala: '1:1000',
+                    tahunArsip: '1994'
+                  });
+                  setIsFormModalOpen(true);
+                }}
+                onNavigateToMapsTab={() => {
+                  setActiveTab('maps');
+                }}
               />
             )}
 
@@ -461,6 +501,7 @@ export default function AdminPage() {
             )}
           </motion.div>
         </AnimatePresence>
+        </div>
       </main>
 
       {/* Modals */}

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
   Map,
+  Archive,
   MessageSquare,
   Settings,
   LogOut,
@@ -15,10 +16,11 @@ import {
 } from 'lucide-react';
 
 interface AdminSidebarProps {
-  activeTab: 'dashboard' | 'maps' | 'complaints' | 'settings';
-  setActiveTab: (tab: 'dashboard' | 'maps' | 'complaints' | 'settings') => void;
+  activeTab: 'dashboard' | 'maps' | 'tabung' | 'complaints' | 'settings';
+  setActiveTab: (tab: 'dashboard' | 'maps' | 'tabung' | 'complaints' | 'settings') => void;
   complaintCount: number;
   totalMaps: number;
+  totalTabung?: number;
   currentUser?: {
     nama: string;
     email: string;
@@ -32,6 +34,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   setActiveTab,
   complaintCount,
   totalMaps,
+  totalTabung = 21,
   currentUser,
   onLogout
 }) => {
@@ -57,6 +60,16 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       badge: (
         <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/20 text-white group-data-active:bg-[#16805C]/10 group-data-active:text-[#16805C]">
           {totalMaps}
+        </span>
+      )
+    },
+    {
+      key: 'tabung' as const,
+      label: 'Data Tabung',
+      icon: Archive,
+      badge: (
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/20 text-white group-data-active:bg-[#16805C]/10 group-data-active:text-[#16805C]">
+          {totalTabung}
         </span>
       )
     },
@@ -194,6 +207,14 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                       {totalMaps}
                     </span>
                   )}
+                  {item.key === 'tabung' && (
+                    <span className={[
+                      'px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold',
+                      isActive ? 'bg-[#16805C]/10 text-[#16805C]' : 'bg-white/20 text-white'
+                    ].join(' ')}>
+                      {totalTabung}
+                    </span>
+                  )}
                   {item.key === 'complaints' && complaintCount > 0 && (
                     <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-400 text-slate-900">
                       {complaintCount}
@@ -203,20 +224,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
               </div>
             );
           })}
-
-          {/* ── Tabung quick link ─────────────────────────── */}
-          <div className="pr-4 mt-1">
-            <Link
-              href="/tabung"
-              className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                <Database className="w-4 h-4 text-white/50" />
-                <span>Lihat Data Tabung (21)</span>
-              </div>
-              <ChevronRight className="w-3.5 h-3.5 opacity-50 shrink-0" />
-            </Link>
-          </div>
         </nav>
 
         {/* ── Bottom: Back to public & Logout ────────────────────────── */}

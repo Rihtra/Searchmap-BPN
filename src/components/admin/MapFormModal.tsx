@@ -63,7 +63,7 @@ export const MapFormModal: React.FC<MapFormModalProps> = ({
     const selectedProj = projects.find((p) => p.id === proyekId);
 
     const record: MapRecord = {
-      id: initialData ? initialData.id : `map-${Date.now()}`,
+      id: initialData && initialData.id ? initialData.id : `map-${Date.now()}`,
       kode: kode.trim(),
       tabungNumber: proyekId,
       kodeTabung: `TABUNG ${proyekId}`,
