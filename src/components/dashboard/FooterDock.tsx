@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { MessageSquare, Info, HelpCircle } from 'lucide-react';
+import Link from 'next/link';
+import { MessageSquare, Info, HelpCircle, Lock } from 'lucide-react';
 
 interface FooterDockProps {
   onOpenComplaint: () => void;
@@ -23,7 +24,7 @@ export const FooterDock: React.FC<FooterDockProps> = ({
           className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-[#525B61] hover:bg-[#E8ECEE] transition"
         >
           <MessageSquare className="w-4 h-4 text-[#525B61]" />
-          <span>Keluhan</span>
+          <span>Feedback</span>
         </button>
 
         <span className="text-slate-200">|</span>
@@ -47,9 +48,17 @@ export const FooterDock: React.FC<FooterDockProps> = ({
         </button>
       </div>
 
-      {/* Copyright Notice */}
-      <div className="text-center text-[11px] text-slate-400 font-medium">
+      {/* Copyright Notice & Admin Login Link */}
+      <div className="text-center text-[11px] text-slate-400 font-medium flex flex-wrap items-center justify-center gap-2">
         <p>© Kantor Pertanahan ATR/BPN Kabupaten Siak — Sistem Temu Balik Arsip Peta Spasial</p>
+        <span className="hidden sm:inline text-slate-300">•</span>
+        <Link
+          href="/admin"
+          className="text-emerald-700 hover:text-emerald-900 font-semibold flex items-center gap-1 transition"
+        >
+          <Lock className="w-3 h-3 text-emerald-700" />
+          <span>Portal Petugas BPN</span>
+        </Link>
       </div>
     </footer>
   );

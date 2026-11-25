@@ -30,7 +30,7 @@ export interface AppComplaint {
   kontak: string;
   keluhan: string;
   tanggal: string;
-  status: 'Menunggu' | 'Ditindaklanjuti' | 'Selesai';
+  status?: string;
 }
 
 export interface SystemConfig {
@@ -39,6 +39,27 @@ export interface SystemConfig {
   instansiNama: string;
   alamatKantor: string;
   kontakAdmin: string;
+}
+
+export interface AdminUser {
+  id: string;
+  nama: string;
+  email: string;
+  password?: string;
+  role: 'Admin';
+  createdAt?: string;
+  lastLogin?: string;
+}
+
+export interface AdminSession {
+  user: {
+    id: string;
+    nama: string;
+    email: string;
+    role: 'Admin';
+  };
+  token: string;
+  loginTime: string;
 }
 
 export const INITIAL_PROJECTS: MapProject[] = [
@@ -2151,15 +2172,32 @@ export const INITIAL_COMPLAINTS: AppComplaint[] = [
     nama: "Budi Santoso",
     kontak: "0812-7654-3210",
     keluhan: "Mohon bantuan pengecekan lembar 43 Proyek PIR ADB Dayun yang tulisan batasnya agak pudar di arsip fisik.",
-    tanggal: "2026-11-20 09:30",
-    status: "Ditindaklanjuti"
+    tanggal: "2026-11-20 09:30"
   },
   {
     id: "comp-2",
     nama: "Ahmad Dahlan",
     kontak: "ahmad.d@gmail.com",
     keluhan: "Apakah peta kapling desa Sikemang tahun 1992 sudah ada versi dwg atau shp hasil digitasi terbarunya?",
-    tanggal: "2026-11-22 14:15",
-    status: "Menunggu"
+    tanggal: "2026-11-22 14:15"
+  }
+];
+
+export const INITIAL_ADMIN_USERS: AdminUser[] = [
+  {
+    id: "usr-1",
+    nama: "Admin Pengelola Arsip",
+    email: "admin.pemetaan@bpn-siak.go.id",
+    password: "adminbpnsiak2026",
+    role: "Admin",
+    createdAt: "2026-01-01 08:00:00"
+  },
+  {
+    id: "usr-2",
+    nama: "Administrator BPN",
+    email: "admin@bpn-siak.go.id",
+    password: "admin123",
+    role: "Admin",
+    createdAt: "2026-01-15 09:00:00"
   }
 ];

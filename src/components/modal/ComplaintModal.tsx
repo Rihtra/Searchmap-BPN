@@ -28,8 +28,7 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
       nama: nama.trim(),
       kontak: kontak.trim() || '-',
       keluhan: keluhan.trim(),
-      tanggal: new Date().toISOString().replace('T', ' ').substring(0, 16),
-      status: 'Menunggu'
+      tanggal: new Date().toISOString().replace('T', ' ').substring(0, 16)
     };
 
     const currentComplaints = getStoredComplaints();
@@ -71,8 +70,8 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
                 <MessageSquare className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 text-sm sm:text-base">Keluhan & Saran Aplikasi</h3>
-                <p className="text-[11px] text-slate-500">Layanan pengaduan arsip & sistem pencarian peta</p>
+                <h3 className="font-bold text-slate-900 text-sm sm:text-base">Feedback & Saran Pengguna</h3>
+                <p className="text-[11px] text-slate-500">Layanan penyampaian masukan & aspirasi sistem pencarian peta</p>
               </div>
             </div>
 
@@ -95,9 +94,9 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
                 <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="text-base font-bold text-slate-900">Keluhan Berhasil Terkirim!</h4>
+                <h4 className="text-base font-bold text-slate-900">Feedback Berhasil Terkirim!</h4>
                 <p className="text-xs text-slate-500 mt-1 max-w-xs">
-                  Terima kasih atas masukan Anda. Tim Seksi Pengukuran dan Pemetaan BPN Siak akan menindaklanjuti.
+                  Terima kasih atas masukan dan saran Anda untuk kemajuan sistem pencarian peta BPN Siak.
                 </p>
               </motion.div>
             ) : (
@@ -131,14 +130,14 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Isi Keluhan atau Pertanyaan <span className="text-red-500">*</span>
+                    Isi Feedback atau Saran <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     required
                     rows={4}
                     value={keluhan}
                     onChange={(e) => setKeluhan(e.target.value)}
-                    placeholder="Tuliskan keluhan Anda (misal: lembar peta tidak jelas, nomor kode tidak ditemukan, permohonan warkah fisik, dsb)..."
+                    placeholder="Tuliskan masukan atau feedback Anda..."
                     className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 resize-none"
                   />
                 </div>
@@ -156,7 +155,7 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
                     className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#525B61] hover:bg-[#3D4449] rounded-xl transition shadow-xs"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    Kirim Keluhan
+                    Kirim Feedback
                   </button>
                 </div>
               </form>

@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Layers, RefreshCw, Archive, Search } from 'lucide-react';
+import { Layers, RefreshCw, Archive, Search, ShieldCheck } from 'lucide-react';
+import { getCurrentSession } from '@/lib/auth';
 
 interface HeaderNavProps {
   onReplayAnimation?: () => void;
@@ -13,6 +14,14 @@ interface HeaderNavProps {
 
 export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMaps = 118 }) => {
   const pathname = usePathname();
+  const [hasSession, setHasSession] = useState(false);
+
+  useEffect(() => {
+    setHasSession(!!getCurrentSession());
+    const handleAuthChange = () => setHasSession(!!getCurrentSession());
+    window.addEventListener('bpn_auth_changed', handleAuthChange);
+    return () => window.removeEventListener('bpn_auth_changed', handleAuthChange);
+  }, []);
 
   const handleReload = () => {
     if (typeof window !== 'undefined') {
@@ -84,6 +93,29 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
             <span className="font-medium">{totalMaps} Berkas Peta</span>
           </div>
 
+          {/* Portal / Dashboard Admin Link */}
+          <Link
+            href="/admin"
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition shadow-xs ${
+              hasSession
+                ? 'bg-emerald-700 hover:bg-emerald-800 text-white'
+                : 'bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 hover:border-emerald-500'
+            }`}
+            title={hasSession ? 'Buka Dashboard Admin (Sesi Aktif)' : 'Login Portal Petugas Admin BPN'}
+          >
+            {hasSession ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+                <span>Dashboard Admin</span>
+              </>
+            ) : (
+              <>
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
+                <span>Portal Admin</span>
+              </>
+            )}
+          </Link>
+
           {/* Requirement 3: Tombol Animasi Ganti Reload */}
           <button
             onClick={handleReload}
@@ -115,6 +147,17 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ onReplayAnimation, totalMa
         >
           <Archive className="w-3.5 h-3.5" />
           <span>Arsip Tabung</span>
+        </Link>
+        <Link
+          href="/admin"
+          className={`flex items-center gap-1.5 px-3 py-1 rounded-lg ${
+            hasSession
+              ? 'bg-emerald-700 text-white'
+              : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+          }`}
+        >
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>{hasSession ? 'Admin' : 'Login Admin'}</span>
         </Link>
       </div>
     </header>
