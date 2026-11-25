@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Vibrant Modern Gradients -->
+    <linearGradient id="cArcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0062FF" />
+      <stop offset="100%" stop-color="#00D2FF" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#FF5500" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5A3" />
+      <stop offset="100%" stop-color="#008C75" />
+    </linearGradient>
+    <filter id="popShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#003366" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- Background Soft Subtle Rounded Plate for Pop & Fun feel -->
+  <rect width="500" height="500" rx="90" fill="#F4F8FD" />
+
+  <g transform="translate(15, 10)" filter="url(#popShadow)">
+    <!-- Globe/Earth Grid Background Element (BPN heritage) subtle in warm sky tint -->
+    <circle cx="235" cy="240" r="140" fill="none" stroke="#D3E4F8" stroke-width="6" stroke-dasharray="8 6" />
+    <ellipse cx="235" cy="240" rx="75" ry="140" fill="none" stroke="#D3E4F8" stroke-width="4" stroke-dasharray="6 6" />
+    <line x1="95" y1="240" x2="375" y2="240" stroke="#D3E4F8" stroke-width="4" stroke-dasharray="6 6" />
+
+    <!-- Maganghub Outer Dynamic Arc (Letter C / Open Growth Portal) -->
+    <path d="M 235 85
+             A 155 155 0 1 0 350 345
+             L 305 305
+             A 95 95 0 1 1 235 145
+             Z" 
+          fill="url(#cArcGrad)" />
+
+    <!-- 3 Sprouting Agrarian Leaves (Batch 3 & ATR/BPN Padi/Bumi) springing out to the top-right -->
+    <!-- Leaf 1: Lower Growth -->
+    <path d="M 265 240 C 310 245, 360 280, 375 250 C 375 210, 315 215, 265 240 Z" 
+          fill="url(#tealGrad)" />
+    <!-- Leaf 2: Middle Vibrant Golden Sprout (Batch 3 core) -->
+    <path d="M 270 230 C 330 220, 395 215, 400 170 C 360 155, 310 185, 270 230 Z" 
+          fill="url(#goldGrad)" />
+    <!-- Leaf 3: Rising Ambition / Top Sprout -->
+    <path d="M 255 210 C 295 160, 350 120, 335 85 C 295 90, 270 145, 255 210 Z" 
+          fill="#FFC400" />
+
+    <!-- Central Portal Node / Intern Seed (Maganghub focal dot) -->
+    <circle cx="235" cy="240" r="42" fill="#0052FF" />
+    <!-- Inner Spark (Golden kernel) -->
+    <circle cx="235" cy="240" r="18" fill="#FFF" />
+  </g>
+</svg>
