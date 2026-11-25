@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -60,7 +60,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
           {/* Modal Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#FBF9F5]">
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full bg-[#525B61] text-white text-xs font-mono font-bold tracking-wider shadow-xs">
+              <span className="px-3 py-1 rounded-full bg-[#16805C] text-white text-xs font-mono font-bold tracking-wider shadow-xs">
                 KODE: {map.kode}
               </span>
               <span className="text-xs text-slate-500 font-medium">
@@ -83,7 +83,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
             <div className="w-full lg:w-3/5 flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                  <Layers className="w-4 h-4 text-[#525B61]" />
+                  <Layers className="w-4 h-4 text-[#16805C]" />
                   Pratinjau Gambar Sketsa & Digitasi
                 </span>
                 <span className="text-[11px] text-slate-400">
@@ -99,8 +99,8 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
             {/* Right: Comprehensive Archive Metadata with HUGE TABUNG DISPLAY */}
             <div className="w-full lg:w-2/5 flex flex-col justify-between gap-4">
               <div className="flex flex-col gap-3.5">
-                {/* PROMINENT LARGE KODE TABUNG (Requirement 3: di tampilan saat mengklik konten maka kode tabung lebih besar, warna disesuaikan #525B61) */}
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-[#242A2E] via-[#3D4449] to-[#525B61] text-white shadow-md border border-[#525B61]/50 flex items-center justify-between">
+                {/* PROMINENT LARGE KODE TABUNG (Requirement 3: di tampilan saat mengklik konten maka kode tabung lebih besar, warna disesuaikan #16805C) */}
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-[#242A2E] via-[#3D4449] to-[#16805C] text-white shadow-md border border-[#16805C]/50 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-widest text-[#D4D9DB] block flex items-center gap-1">
                       <Archive className="w-3.5 h-3.5" />
@@ -126,7 +126,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                   <div className="mb-1.5">
                     {map.ttd ? (
                       <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#E8ECEE] text-[#2C3236] border border-[#CBD2D6]">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#525B61]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#16805C]" />
                         Disahkan / Bertandatangan
                       </span>
                     ) : (
@@ -144,7 +144,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                 {/* Details Grid */}
                 <div className="bg-slate-50/80 rounded-2xl p-3.5 border border-slate-200/70 flex flex-col gap-2 text-xs text-slate-700">
                   <div className="flex items-start gap-2">
-                    <Building2 className="w-4 h-4 text-[#525B61] shrink-0 mt-0.5" />
+                    <Building2 className="w-4 h-4 text-[#16805C] shrink-0 mt-0.5" />
                     <div>
                       <span className="text-slate-400 block text-[10px] font-bold uppercase">Proyek Induk</span>
                       <span className="font-semibold text-slate-800">{map.proyekNama}</span>
@@ -152,7 +152,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                   </div>
 
                   <div className="flex items-start gap-2 pt-2 border-t border-slate-200/60">
-                    <MapPin className="w-4 h-4 text-[#525B61] shrink-0 mt-0.5" />
+                    <MapPin className="w-4 h-4 text-[#16805C] shrink-0 mt-0.5" />
                     <div>
                       <span className="text-slate-400 block text-[10px] font-bold uppercase">Lokasi Administratif</span>
                       <span className="font-semibold text-slate-800">
@@ -162,7 +162,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                   </div>
 
                   <div className="flex items-start gap-2 pt-2 border-t border-slate-200/60">
-                    <FileText className="w-4 h-4 text-[#525B61] shrink-0 mt-0.5" />
+                    <FileText className="w-4 h-4 text-[#16805C] shrink-0 mt-0.5" />
                     <div className="w-full flex items-center justify-between">
                       <div>
                         <span className="text-slate-400 block text-[10px] font-bold uppercase">Petunjuk Lembar</span>
@@ -180,7 +180,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                   </div>
 
                   <div className="flex items-start gap-2 pt-2 border-t border-slate-200/60">
-                    <Calendar className="w-4 h-4 text-[#525B61] shrink-0 mt-0.5" />
+                    <Calendar className="w-4 h-4 text-[#16805C] shrink-0 mt-0.5" />
                     <div>
                       <span className="text-slate-400 block text-[10px] font-bold uppercase">Penyimpanan Warkah Fisik</span>
                       <span className="text-slate-600">
@@ -197,7 +197,7 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
                   href={config.googleDriveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#525B61] hover:bg-[#3D4449] text-white text-xs font-bold transition shadow-xs"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#16805C] hover:bg-[#3D4449] text-white text-xs font-bold transition shadow-xs"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>Buka Berkas Peta di Google Drive</span>
@@ -218,3 +218,4 @@ export const MapPreviewModal: React.FC<MapPreviewModalProps> = ({
     </AnimatePresence>
   );
 };
+

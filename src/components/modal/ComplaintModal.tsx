@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -66,7 +66,7 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#FAF8F5]">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#525B61] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#16805C] flex items-center justify-center">
                 <MessageSquare className="w-4 h-4" />
               </div>
               <div>
@@ -152,7 +152,7 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
                   </button>
                   <button
                     type="submit"
-                    className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#525B61] hover:bg-[#3D4449] rounded-xl transition shadow-xs"
+                    className="flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#16805C] hover:bg-[#3D4449] rounded-xl transition shadow-xs"
                   >
                     <Send className="w-3.5 h-3.5" />
                     Kirim Feedback
@@ -166,3 +166,4 @@ export const ComplaintModal: React.FC<ComplaintModalProps> = ({ isOpen, onClose 
     </AnimatePresence>
   );
 };
+

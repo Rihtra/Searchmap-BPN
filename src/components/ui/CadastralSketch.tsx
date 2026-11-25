@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import { ZoomIn, ZoomOut, RotateCcw, Compass, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -133,7 +133,7 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
           <g transform="translate(710, 80)">
             <circle cx="0" cy="0" r="28" fill="#FFFDF8" stroke="#5A4A38" strokeWidth="1.2" />
             <path d="M 0 -24 L 5 -5 L 24 0 L 5 5 L 0 24 L -5 5 L -24 0 L -5 -5 Z" fill="#D4AF37" stroke="#4A3828" strokeWidth="0.8" />
-            <polygon points="0,-24 0,0 5,-5" fill="#525B61" />
+            <polygon points="0,-24 0,0 5,-5" fill="#16805C" />
             <polygon points="0,-24 0,0 -5,-5" fill="#3D4449" />
             <text x="0" y="-27" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#3D4449">U</text>
             <text x="28" y="4" textAnchor="start" fontSize="9" fill="#5A4A38">T</text>
@@ -207,14 +207,14 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
             <polygon
               points="285,15 410,22 405,120 280,118"
               fill="#E8ECEE"
-              stroke="#525B61"
+              stroke="#16805C"
               strokeWidth="2.2"
             />
-            <circle cx="345" cy="65" r="28" fill="#525B61" fillOpacity="0.1" />
-            <rect x="315" y="45" width="65" height="42" rx="4" fill="#FFFFFF" stroke="#525B61" strokeWidth="1.2" />
+            <circle cx="345" cy="65" r="28" fill="#16805C" fillOpacity="0.1" />
+            <rect x="315" y="45" width="65" height="42" rx="4" fill="#FFFFFF" stroke="#16805C" strokeWidth="1.2" />
             <text x="347" y="60" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#2C3236">BIDANG ARSIP</text>
             <text x="347" y="73" textAnchor="middle" fontSize="12" fontWeight="800" fill="#3D4449">NO. {map.petunjukLembar || '01'}</text>
-            <text x="347" y="83" textAnchor="middle" fontSize="8" fill="#525B61">KODE: {map.kode}</text>
+            <text x="347" y="83" textAnchor="middle" fontSize="8" fill="#16805C">KODE: {map.kode}</text>
 
             {/* Parcel Block B2 */}
             <polygon
@@ -283,7 +283,7 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
 
             {/* Data Grid: Kode, Lembar, Skala */}
             <text x="14" y="115" fontSize="8" fill="#6B7280">NOMOR KODE:</text>
-            <text x="90" y="115" fontSize="9.5" fontWeight="bold" fill="#525B61">{map.kode}</text>
+            <text x="90" y="115" fontSize="9.5" fontWeight="bold" fill="#16805C">{map.kode}</text>
 
             <text x="150" y="115" fontSize="8" fill="#6B7280">LEMBAR:</text>
             <text x="210" y="115" fontSize="9" fontWeight="bold" fill="#1F2937">{map.petunjukLembar || '-'}</text>
@@ -317,7 +317,7 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
             <line x1="8" y1="195" x2="272" y2="195" stroke="#E5E7EB" strokeWidth="1" />
             {map.ttd ? (
               <g transform="translate(140, 214)">
-                <rect x="-65" y="-12" width="130" height="20" rx="3" fill="#E8ECEE" stroke="#525B61" strokeWidth="1" />
+                <rect x="-65" y="-12" width="130" height="20" rx="3" fill="#E8ECEE" stroke="#16805C" strokeWidth="1" />
                 <text x="0" y="2" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#2C3236">
                   ✓ DISAHKAN & BERTANDATANGAN
                 </text>
@@ -341,7 +341,7 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
         <span className="text-slate-600 font-mono">Lembar: {map.petunjukLembar || '-'}</span>
         <span className="text-slate-300">|</span>
         {map.ttd ? (
-          <span className="flex items-center gap-1 text-[#525B61] font-medium">
+          <span className="flex items-center gap-1 text-[#16805C] font-medium">
             <CheckCircle2 className="w-3.5 h-3.5" /> Sah BPN
           </span>
         ) : (
@@ -353,3 +353,4 @@ export const CadastralSketch: React.FC<CadastralSketchProps> = ({
     </div>
   );
 };
+

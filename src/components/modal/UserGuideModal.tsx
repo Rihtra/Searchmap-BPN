@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -61,7 +61,7 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ isOpen, onClose 
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-[#FAF8F5]">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#525B61] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-[#E8ECEE] text-[#16805C] flex items-center justify-center">
                 <HelpCircle className="w-4 h-4" />
               </div>
               <div>
@@ -88,12 +88,12 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ isOpen, onClose 
                     key={st.num}
                     className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/70"
                   >
-                    <div className="w-8 h-8 rounded-xl bg-[#525B61] text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#16805C] text-white font-mono font-bold text-xs flex items-center justify-center shrink-0">
                       {st.num}
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-1.5">
-                        <IconComponent className="w-3.5 h-3.5 text-[#525B61]" />
+                        <IconComponent className="w-3.5 h-3.5 text-[#16805C]" />
                         {st.title}
                       </h4>
                       <p className="text-xs text-slate-500 mt-1 leading-relaxed">
@@ -120,3 +120,4 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ isOpen, onClose 
     </AnimatePresence>
   );
 };
+

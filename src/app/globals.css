@@ -1,9 +1,9 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --background: #F7F6F2;
   --foreground: #1E293B;
-  --primary-slate: #525B61;
+  --primary-slate: #16805C;
   --primary-dark: #3D4449;
   --accent-soft: #E8ECEE;
   --card-bg: #FFFFFF;
@@ -50,6 +50,7 @@ body {
 }
 
 .card-dark-slate {
-  background: linear-gradient(135deg, #525B61 0%, #3D4449 100%);
+  background: linear-gradient(135deg, #16805C 0%, #3D4449 100%);
   color: #FFFFFF;
 }
+
